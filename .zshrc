@@ -8,7 +8,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="half-life"
+ZSH_THEME="clean"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -79,7 +79,7 @@ source $ZSH/oh-my-zsh.sh
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
-export LANG=en_US.UTF-8
+# export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -99,51 +99,17 @@ export LANG=en_US.UTF-8
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias python=python3
-alias py=python3
-alias ipython=ipython3
-alias rm='rm -v'
 
-alias postman='Postman'
-
-# export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
-export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
-# export JAVA_HOME=/usr/lib/jvm/java-19-openjdk-amd64
-export CLASSPATH=.:$JAVA_HOME/lib
-export PATH=$JAVA_HOME/bin:$PATH
-
-export NEO4J_HOME=/etc/neo4j
-
-#export DOTNET_ROOT=$HOME/Applications/dotnet
-#export PATH=$DOTNET_ROOT:$PATH
-
-alias tinyrenderer='cd ~/Code/tinyRenderer'
+# export PATH="$HOME/.local/bin:$PATH"
 
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/feng/Applications/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/feng/Applications/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/feng/Applications/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/feng/Applications/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-#export PATH=/home/feng/Applications/anaconda3/bin:$PATH
+alias python="python3"
+alias rm="rm -v"
 
-export BLOG_ROOT="/home/feng/Code/Blog/"
 
-export PATH=/home/feng/Applications/Postman/:$PATH
+export http_proxy="127.0.0.1:7890"
+export https_proxy="127.0.0.1:7890"
 
-export PATH="$(go env GOPATH)/bin:$PATH"
-export PATH="/home/feng/Script/:$PATH"
-
-export RPATH="/usr/lib:/usr/local/lib"
-
-export PATH="/home/feng/Applications/wrk:$PATH"
+# my shell is fucking 256 color
+export TERM=xterm-256color
 
