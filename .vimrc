@@ -98,7 +98,6 @@ filetype plugin indent on
 filetype on "打开文件类型检测
 "set fileencodings=euc-cn,ucs-bom,utf-8,cp936,gb2312,gb18030,gbk,big5,euc-jp,euc-kr,latin1
 set fileencodings=utf-8,gb2312,gbk,gb18030
-"这个用能很给劲,不管encoding是什么编码,都能将文本显示汉字
 "set termencoding=gb2312
 set termencoding=utf-8
 "新建文件使用的编码
@@ -237,7 +236,40 @@ hi CursorLine  cterm=NONE   ctermbg=darkgray ctermfg=white
 set ts=4
 set expandtab
 
-" 主要给Tlist使用
-let Tlist_Exit_OnlyWindow = 1
-let Tlist_Auto_Open = 1
+
+call plug#begin()
+Plug 'scrooloose/nerdtree'
+Plug 'morhetz/gruvbox'
+
+call plug#end()
+
+" grubox theme
+autocmd vimenter * ++nested colorscheme gruvbox
+
+
+" ######set for NERDTree############
+" 设置NERDTree子窗口位置
+let NERDTreeWinPos="left"
+" 显示隐藏文件
+let NERDTreeShowHidden=1
+" 是否显示行号
+let g:NERDTreeShowLineNumbers=1
+nmap <F8> :NERDTreeToggle<CR>
+nmap <F2> :NERDTreeFind<CR>
+
+" NERDTree
+nnoremap <C-b> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
+" 启动时自动打开 Nerdtree
+autocmd vimenter * NERDTree
+" 唯一窗口时退出 Vim
+autocmd BufEnter * if winnr('$') == 1 && exists('t:NERDTreeBufName') && bufname() == t:NERDTreeBufName | q | endif
+" 焦点放在主窗口
+augroup NERD
+    au!
+    autocmd VimEnter * NERDTree
+    autocmd VimEnter * wincmd p
+augroup END
+
+
 
