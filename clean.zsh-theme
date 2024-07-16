@@ -6,11 +6,11 @@ PROMPT='%F{172}[%*]%f %F{193}%n%f %F{69}%c%f $(git_prompt_info)%F{154}$%f '
 
 # git theming
 # ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}(%{$fg_no_bold[yellow]%}%B"
-ZSH_THEME_GIT_PROMPT_PREFIX="%F{221}"
+ZSH_THEME_GIT_PROMPT_PREFIX="%F{155}"
 # ZSH_THEME_GIT_PROMPT_SUFFIX="%b%{$fg_bold[blue]%})%{$reset_color%} "
-ZSH_THEME_GIT_PROMPT_SUFFIX=" "
+ZSH_THEME_GIT_PROMPT_SUFFIX="%f "
 ZSH_THEME_GIT_PROMPT_CLEAN=""
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg_bold[red]%}✗"
+ZSH_THEME_GIT_PROMPT_DIRTY="%F{160}✗%f"
 
 # LS colors, made with https://geoff.greer.fm/lscolors/
 export LSCOLORS="Gxfxcxdxbxegedabagacad"

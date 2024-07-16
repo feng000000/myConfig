@@ -91,7 +91,7 @@ filetype plugin on
 "为特定文件类型载入相关缩进文件
 filetype indent on
 " 启用自动补全
-filetype plugin indent on 
+filetype plugin indent on
 
 
 "设置编码自动识别, 中文引号显示
@@ -236,18 +236,22 @@ hi CursorLine  cterm=NONE   ctermbg=darkgray ctermfg=white
 set ts=4
 set expandtab
 
+" 定义一个自动命令，在每次保存文件时自动去除行末空格
+autocmd BufWritePre * :%s/\s\+$//e
 
 call plug#begin()
 Plug 'scrooloose/nerdtree'
 Plug 'morhetz/gruvbox'
-
+Plug 'vim-scripts/taglist.vim'
+Plug 'valloric/youcompleteme'
+Plug 'w0rp/ale'
 call plug#end()
 
 " grubox theme
 autocmd vimenter * ++nested colorscheme gruvbox
 
 
-" ######set for NERDTree############
+" NERDTree
 " 设置NERDTree子窗口位置
 let NERDTreeWinPos="left"
 " 显示隐藏文件
@@ -256,20 +260,68 @@ let NERDTreeShowHidden=1
 let g:NERDTreeShowLineNumbers=1
 nmap <F8> :NERDTreeToggle<CR>
 nmap <F2> :NERDTreeFind<CR>
-
-" NERDTree
 nnoremap <C-b> :NERDTreeToggle<CR>
 nnoremap <C-f> :NERDTreeFind<CR>
 " 启动时自动打开 Nerdtree
-autocmd vimenter * NERDTree
 " 唯一窗口时退出 Vim
 autocmd BufEnter * if winnr('$') == 1 && exists('t:NERDTreeBufName') && bufname() == t:NERDTreeBufName | q | endif
-" 焦点放在主窗口
-augroup NERD
-    au!
-    autocmd VimEnter * NERDTree
-    autocmd VimEnter * wincmd p
-augroup END
+" 自动启动, 并且焦点放在主窗口
+" augroup NERD
+"     au!
+"     autocmd VimEnter * NERDTree
+"     autocmd VimEnter * wincmd p
+" augroup END
 
 
+" Taglist
+" 只显示当前文件的taglist
+let Tlist_Show_One_File=1
+" 如果是最后一个窗口，直接退出
+let Tlist_Exit_OnlyWindow=1
+" 在右侧显示
+let Tlist_Use_Right_Window=1
+nmap <F9> :TlistToggle<CR>
+set updatetime=500
 
+"youcompleteme  默认tab  s-tab 和自动补全冲突
+let g:ycm_confirm_extra_conf=1 "打开加载.ycm_extra_conf.py提示
+let g:ycm_collect_identifiers_from_tags_files=1 " 开启 YCM 基于标签引擎
+let g:ycm_min_num_of_chars_for_completion=1 " 从第2个键入字符就开始罗列匹配项
+let g:ycm_cache_omnifunc=0 " 禁止缓存匹配项,每次都重新生成匹配项
+let g:ycm_seed_identifiers_with_syntax=1 " 语法关键字补全
+inoremap <leader><leader> <C-x><C-o>
+"在注释输入中也能补全
+let g:ycm_complete_in_comments = 1
+"在字符串输入中也能补全
+let g:ycm_complete_in_strings = 1
+"注释和字符串中的文字也会被收入补全
+let g:ycm_collect_identifiers_from_comments_and_strings = 0
+nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+let g:clang_library_path='/usr/lib/llvm-10/lib/libclang.so'
+let g:ycm_global_ycm_extra_conf='~/.vim/plugged/youcompleteme/.ycm_extra_conf.py'
+let g:ycm_filetype_whitelist = {
+			\ "c":1,
+			\ "cpp":1,
+			\ }
+" 增加语义触发条件
+let g:ycm_semantic_triggers =  {
+  \   'c' : ['->', '.'],
+  \   'objc' : ['->', '.', 're!\[[_a-zA-Z]+\w*\s', 're!^\s*[^\W\d]\w*\s',
+  \             're!\[.*\]\s'],
+  \   'ocaml' : ['.', '#'],
+  \   'cpp,objcpp' : ['->', '.', '::'],
+  \   'perl' : ['->'],
+  \   'php' : ['->', '::'],
+  \   'cs,java,javascript,typescript,d,python,perl6,scala,vb,elixir,go' : ['.'],
+  \   'ruby' : ['.', '::'],
+  \   'lua' : ['.', ':'],
+  \   'erlang' : [':'],
+  \ }
+
+" ale
+
+let g:ale_linters = {'cpp': ['cpplint'],'c': ['cpplint'],'python': ['pylint']}
+let g:ale_sign_err = "✗"
+let g:ale_sign_warnin = "⚠"
+nmap sp <Plug>(ale_previous_wrap)
+nmap sn <Plug>(ale_next_wrap)
