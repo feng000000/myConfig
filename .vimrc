@@ -241,14 +241,11 @@ autocmd BufWritePre * :%s/\s\+$//e
 
 call plug#begin()
 Plug 'scrooloose/nerdtree'
-Plug 'morhetz/gruvbox'
 Plug 'vim-scripts/taglist.vim'
 Plug 'valloric/youcompleteme'
 Plug 'w0rp/ale'
 call plug#end()
 
-" grubox theme
-autocmd vimenter * ++nested colorscheme gruvbox
 
 
 " NERDTree
@@ -325,3 +322,10 @@ let g:ale_sign_err = "✗"
 let g:ale_sign_warnin = "⚠"
 nmap sp <Plug>(ale_previous_wrap)
 nmap sn <Plug>(ale_next_wrap)
+
+" monokai themes
+" autocmd vimenter * hi Normal guibg=NONE ctermbg=NONE " transparent bg
+" syntax enable
+" colorscheme monokai
+
+
