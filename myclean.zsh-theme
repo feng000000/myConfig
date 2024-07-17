@@ -1,7 +1,35 @@
+prompt_git() {
+  local ref dirty
+  if [[ "$__GIT_PROMPT_IGNORE_STASH" == "1" ]]; then
+    ref=$(command git symbolic-ref HEAD 2> /dev/null) || return
+  else
+    ref=$(command git symbolic-ref HEAD 2> /dev/null || command git rev-parse --short HEAD 2> /dev/null) || return
+  fi
+  if [[ "$__GIT_PROMPT_IGNORE_UNTRACKED" == "1" ]]; then
+    command git diff --no-ext-diff --quiet --exit-code --ignore-submodules
+    dirty=$?
+  else
+    command git diff --no-ext-diff --quiet --exit-code --ignore-submodules
+    dirty=$(( $? ))
+    command git diff --no-ext-diff --cached --quiet --exit-code --ignore-submodules || dirty=$(( $? + 1 ))
+    command git ls-files --others --exclude-standard --error-unmatch . 1> /dev/null 2> /dev/null
+    [[ $? -eq 0 ]] && dirty=$(( $? + 1 ))
+  fi
+  if [[ -n "$ref" ]]; then
+    echo -n " on ${ref#refs/heads/}"
+  fi
+  if [[ "$dirty" -eq 0 ]]; then
+    echo -n " ${ZSH_THEME_GIT_PROMPT_CLEAN:-✗}"
+  else
+    echo -n " ${ZSH_THEME_GIT_PROMPT_DIRTY:-✗}"
+  fi
+}
+
+
 if [ $UID -eq 0 ]; then NCOLOR="red"; else NCOLOR="white"; fi
 
 # PROMPT='[%*] %{$fg[$NCOLOR]%}%B%n%b%{$reset_color%} in %{$fg[blue]%}%B%c/%b%{$reset_color%} $(git_prompt_info)%(!.#.$) '
-PROMPT='%F{172}[%*]%f %F{193}%n%f %F{69}%c%f $(git_prompt_info)%F{154}$%f '
+PROMPT='%F{172}[%*]%f %F{193}%n%f %F{69}%c%f $(git_prompt_info)%(?:%F{154}$%f:%F{red}$%f) '
 # RPROMPT='[%*]'
 
 # git theming
