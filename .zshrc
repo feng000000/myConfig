@@ -105,6 +105,7 @@ source $ZSH/oh-my-zsh.sh
 
 alias python="python3"
 alias rm="rm -v"
+alias tmux="tmux -u"
 
 
 export http_proxy="127.0.0.1:7890"
