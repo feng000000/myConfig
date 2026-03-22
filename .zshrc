@@ -8,7 +8,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="clean"
+ZSH_THEME="myclean"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -108,8 +108,13 @@ alias rm="rm -v"
 alias tmux="tmux -u"
 
 
-export http_proxy="127.0.0.1:7890"
-export https_proxy="127.0.0.1:7890"
+export HTTP_PROXY="http://127.0.0.1:7897"
+export HTTPS_PROXY="http://127.0.0.1:7897"
+export ALL_PROXY="sock5://127.0.0.1:7897"
+export http_proxy="http://127.0.0.1:7897"
+export https_proxy="http://127.0.0.1:7897"
+export all_proxy="sock5://127.0.0.1:7897"
+
 
 # my shell is fucking 256 color
 export TERM=xterm-256color
