@@ -123,7 +123,7 @@ set t_Co=256
 "colorscheme wombat256mod
 "colorscheme gardener
 "colorscheme elflord
-colorscheme desert
+"colorscheme desert
 "colorscheme evening
 "colorscheme darkblue
 "colorscheme torte
