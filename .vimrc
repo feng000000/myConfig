@@ -332,4 +332,10 @@ nmap sn <Plug>(ale_next_wrap)
 " syntax enable
 " colorscheme monokai
 
-
+" 定义 Wq, WQ, wQ 为 wq 的别名
+command! Wq wq
+command! WQ wq
+command! Wq wq
+command! WQ wq
+command! W w
+command! Q q
